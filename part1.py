@@ -1,3 +1,6 @@
+# NAME: Ana Maria Cardenas Gasca
+# ID: amcard
+
 # these should be the only imports you need
 import tweepy
 import nltk

@@ -18,4 +18,5 @@ if (result.status_code == 200):
             sub_soup = bs4.BeautifulSoup(sub_content, 'html.parser')
             a_div = sub_soup.find("div", {"class": "byline"})
             author = 'Not Listed' if a_div is None else a_div.find("a").string
-            print('{} by {}'.format(article.string, author))
+            print(article.string)
+            print(' by {}'.format(author))

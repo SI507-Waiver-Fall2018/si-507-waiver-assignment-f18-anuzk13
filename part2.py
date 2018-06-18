@@ -15,19 +15,21 @@ c = conn.cursor()
 command = sys.argv[1]
 
 if (command == 'customers'):
-    print('ID Customer Name')
-    for row in c.execute("SELECT id, ContactName FROM 'Customer'"):
-        print(str(row[0]) + ' ' + row[1])
+    print('ID\tCustomer Name')
+    for row in c.execute("SELECT id, CompanyName FROM 'Customer'"):
+        print(str(row[0]) + ' \t ' + row[1])
 elif (command == 'employees'):
-    print('ID   Employee Name')
+    print('ID\tEmployee Name')
     for row in c.execute("SELECT id, FirstName, LastName FROM 'Employee'"):
-        print(str(row[0]) + ' ' + row[1] + ' ' + row[2])
+        print(str(row[0]) + ' \t ' + row[1] + ' ' + row[2])
 elif (command == 'orders'):
     ord_params = sys.argv[2].split("=")
     if (ord_params[0] == 'cust'):
-        for row in c.execute("SELECT Id, OrderDate FROM 'Order' WHERE CustomerId=?", (ord_params[1],)):
-            print(str(row[0]) + ' ' + row[1])
+        print('Order dates')
+        for row in c.execute("SELECT OrderDate FROM 'Order' WHERE CustomerId=?", (ord_params[1],)):
+            print(row[0])
     elif(ord_params[0] == 'emp'):
-        for row in c.execute("SELECT Id, OrderDate FROM 'Order' WHERE EmployeeId=?", (ord_params[1],)):
-            print(str(row[0]) + ' ' + row[1])
+        print('Order dates')
+        for row in c.execute("SELECT OrderDate FROM 'Order' INNER JOIN 'Employee' on 'Employee'.id = EmployeeId WHERE 'Employee'.LastName =?", (ord_params[1],)):
+            print(row[0])
     

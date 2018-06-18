@@ -11,7 +11,7 @@ import plotly.graph_objs as go
 py.sign_in('anuzk13', 'YXTcJoHfZLBlDhVHrDc6')
 nouns = []
 freq = []
-with open('part1.csv') as n_file:
+with open('noun_data.csv') as n_file:
     first_row = next(n_file)
     for row in n_file:
         nouns.append(row.split(',')[0])

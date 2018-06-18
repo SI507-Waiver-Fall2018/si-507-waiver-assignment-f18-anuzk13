@@ -71,7 +71,7 @@ print('TIMES FAVORITED (ORIGINAL TWEETS ONLY): {}'.format(favorite_count))
 print('TIMES RETWEETED (ORIGINAL TWEETS ONLY): {}'.format(retweet_count))
 
 # write file
-file_name = "part1.csv"
+file_name = "noun_data.csv"
 file_content = ['Noun,Number'] + list(map(lambda n: '{},{}'.format(n[0],n[1]), nouns_top_five))
 
 with open(file_name, 'w') as file_handle:  

@@ -52,8 +52,11 @@ for tw in tagged_words:
             nouns.append(tw[0])
 
 verbs_top_five = nltk.FreqDist(verbs).most_common(5)
+verbs_organized = sorted(verbs_top_five, key=lambda tweet: tweet[0])
 adjectives_top_five = nltk.FreqDist(adjectives).most_common(5)
+adj_organized = sorted(adjectives_top_five, key=lambda tweet: tweet[0])
 nouns_top_five = nltk.FreqDist(nouns).most_common(5)
+nouns_organized = sorted(nouns_top_five, key=lambda tweet: tweet[0])
 
 #original tweets statistics
 original_tweets = list(filter(lambda tweet: not tweet.retweeted, user_feeds))
@@ -63,16 +66,16 @@ retweet_count = sum(t.retweet_count for t in original_tweets)
 # print answers
 print('USER: {}'.format(user))
 print('TWEETS ANALYZED: {}'.format(len(user_feeds)))
-print('VERBS: ' + " ".join(['{}({})'.format(item[0],item[1]) for item in verbs_top_five]))
-print('NOUNS: ' + " ".join(['{}({})'.format(item[0],item[1]) for item in adjectives_top_five]))
-print('ADJECTIVES: ' + " ".join(['{}({})'.format(item[0],item[1]) for item in nouns_top_five]))
+print('VERBS: ' + " ".join(['{}({})'.format(item[0],item[1]) for item in verbs_organized]))
+print('NOUNS: ' + " ".join(['{}({})'.format(item[0],item[1]) for item in adj_organized]))
+print('ADJECTIVES: ' + " ".join(['{}({})'.format(item[0],item[1]) for item in nouns_organized]))
 print('ORIGINAL TWEETS: {}'.format(len(original_tweets)))
 print('TIMES FAVORITED (ORIGINAL TWEETS ONLY): {}'.format(favorite_count))
 print('TIMES RETWEETED (ORIGINAL TWEETS ONLY): {}'.format(retweet_count))
 
 # write file
 file_name = "noun_data.csv"
-file_content = ['Noun,Number'] + list(map(lambda n: '{},{}'.format(n[0],n[1]), nouns_top_five))
+file_content = ['Noun,Number'] + list(map(lambda n: '{},{}'.format(n[0],n[1]), nouns_organized))
 
 with open(file_name, 'w') as file_handle:  
     # set the new output channel
